@@ -1,0 +1,7 @@
+{
+    "currency": "Tomans",
+    "not_found": {
+        "description": "The page you were looking for is not found.",
+        "button": "Back to home"
+    }
+}

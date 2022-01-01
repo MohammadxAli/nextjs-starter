@@ -1,0 +1,76 @@
+:root {
+    --swiper-theme-color: #{$primary};
+}
+
+::selection {
+    background-color: $primary;
+    color: $white;
+}
+
+html {
+    @include media-breakpoint-down(md) {
+        font-size: 95%;
+    }
+    @include media-breakpoint-down(sm) {
+        font-size: 90%;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* targeting only firefox browser */
+@-moz-document url-prefix() {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body,
+html {
+    height: 100%;
+}
+
+button {
+    outline: 0 !important;
+}
+
+#__next {
+    height: 100%;
+}
+
+html[dir="ltr"] {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.875rem;
+
+    /*
+        Some of icons should rotate in ltr,
+        according to material design guideline
+    */
+    .icon {
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+    }
+
+    /*
+        Make sure tailwind font styles are
+        converted to English when direction is ltr
+    */
+    .font-sans,
+    .font-serif {
+        font-family: "Poppins", sans-serif;
+    }
+}
+
+.svg-wrapper {
+    > * {
+        fill: currentColor;
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+}

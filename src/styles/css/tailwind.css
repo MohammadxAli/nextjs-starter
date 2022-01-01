@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-shadow-md {
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12),
+            0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .text-shadow-lg {
+        text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11),
+            0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .text-shadow-none {
+        text-shadow: none;
+    }
+}
+
+@layer base {
+    [dir="rtl"] .prose ul > li,
+    [dir="rtl"] .prose ol > li {
+        @apply pl-0 pr-7;
+    }
+
+    [dir="rtl"] .prose ul > li:before,
+    [dir="rtl"] .prose ol > li:before {
+        @apply right-0 left-auto;
+    }
+
+    [dir="rtl"] .prose blockquote {
+        @apply pl-0 pr-2 border-l-0;
+        border-right-width: 0.25rem;
+        border-right-color: #e5e7eb;
+    }
+}
