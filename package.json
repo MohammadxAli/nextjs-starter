@@ -2,6 +2,10 @@
     "name": "next.js-starter",
     "version": "1.0.0",
     "license": "MIT",
+    "author": {
+        "name": "Mohammad Ali Shahbazi",
+        "email": "mohammadali.shahbazi@gmail.com"
+    },
     "scripts": {
         "dev": "next",
         "watch": "next",
