@@ -1,0 +1,29 @@
+{
+    "name": "mock-server",
+    "version": "1.0.0",
+    "description": "",
+    "author": {
+        "name": "Mohammad Ali Shahbazi",
+        "email": "mohammadali.shahbazi@gmail.com"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon --exec \"node seed.js && node index.js\"",
+        "watch": "npm run dev",
+        "postinstall": "node seed.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@faker-js/faker": "^6.0.0-beta.0",
+        "clone": "^2.1.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.1",
+        "json-server": "^0.16.3",
+        "parse-link-header": "^2.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    }
+}
