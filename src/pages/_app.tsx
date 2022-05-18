@@ -19,7 +19,7 @@ import nextI18nConfig from "../../next-i18next.config";
 import type { AppProps } from "next/app";
 import { EmotionCache } from "@emotion/cache";
 import createEmotionCache from "@/theme/createEmotionCache";
-import GlobalContextProvider from "@/context/GlobalContextProvider";
+import GlobalContextProvider from "@/contexts/GlobalContextProvider";
 import { NextPage } from "next";
 import useConfigureQueryClient from "@/hooks/common/useCustomQueryClient";
 import GlobalLoader from "@/components/common/GlobalLoader";
