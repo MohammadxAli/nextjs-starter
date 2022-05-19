@@ -1,4 +1,4 @@
-import { DivProps } from "react-html-props";
+import { DivProps } from "@/types/react-html-props";
 import clsx from "clsx";
 import InfoIcon from "@mui/icons-material/Info";
 import { useTranslation } from "next-i18next";

@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
 import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
-import useIsDesktop from "@/hooks/common/useIsDesktop";
+import useBreakpointUp from "@/hooks/common/useBreakpointUp";
 
 interface AlertSnackbarProps extends Omit<SnackbarProps, "children"> {
     children?: React.ReactNode;
@@ -23,13 +23,13 @@ const AlertSnackbar = ({
     useEffect(() => {
         setIsOpen(open);
     }, [open]);
-    const isDesktop = useIsDesktop();
+    const matches = useBreakpointUp("xl");
     return (
         <Snackbar
             open={isOpen}
-            style={{ bottom: !isDesktop ? 70 : 24 }}
+            style={{ bottom: !matches ? 70 : 24 }}
             anchorOrigin={{
-                horizontal: isDesktop ? "left" : "center",
+                horizontal: matches ? "left" : "center",
                 vertical: "bottom",
             }}
             {...props}

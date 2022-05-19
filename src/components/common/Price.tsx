@@ -1,8 +1,7 @@
+import { SpanProps } from "@/types/react-html-props";
 import clsx from "clsx";
-import { useRouter } from "next/router";
-import { SpanProps } from "react-html-props";
 import { useTranslation } from "next-i18next";
-import { formatNumber } from "@/helpers/helpers";
+import { FormattedNumber } from "react-intl";
 
 interface PriceProps extends SpanProps {
     price: number;
@@ -15,7 +14,6 @@ const Price = ({
     className,
     ...props
 }: PriceProps) => {
-    const { locale } = useRouter();
     const { t } = useTranslation();
     return (
         <span
@@ -25,7 +23,9 @@ const Price = ({
             )}
             {...props}
         >
-            <span>{formatNumber(locale, price)}</span>
+            <span>
+                <FormattedNumber value={price} />
+            </span>
             <span
                 className={clsx(
                     variant === "secondary" && "text-sm opacity-50"

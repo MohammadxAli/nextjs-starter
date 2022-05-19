@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { DivProps } from "react-html-props";
+import { DivProps } from "@/types/react-html-props";
 
 interface CkEditorProps extends DivProps {
     content: string;

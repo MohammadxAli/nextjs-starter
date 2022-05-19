@@ -1,5 +1,7 @@
 {
     "site_title": "عنوان سایت",
+    "loading": "در حال بارگذاری",
+    "load_more": "نمایش بیشتر",
     "currency": "تومان",
     "alerts": {
         "not_found": "موردی یافت نشد",

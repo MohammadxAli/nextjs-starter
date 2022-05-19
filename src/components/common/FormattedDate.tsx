@@ -1,9 +1,9 @@
-import { ElementProps } from "react-html-props";
+import { ElementPropsWithoutRef } from "@/types/react-html-props";
 import { formatDistance, formatISO, isBefore, subDays } from "date-fns";
-import { getDateFnsLocaleByCode } from "@/helpers/helpers";
 import { useRouter } from "next/router";
+import { getDateFnsLocaleByCode } from "@/helpers/utils";
 
-interface Props extends ElementProps {
+interface Props extends ElementPropsWithoutRef {
     date: string | number | Date;
     distanceFormat?: boolean;
 }

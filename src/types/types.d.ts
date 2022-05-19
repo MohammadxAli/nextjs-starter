@@ -45,4 +45,6 @@ declare global {
         query?: QueryParams;
         [key: string]: any;
     }
+
+    type InViewRefType = (node?: Element | null | undefined) => void;
 }

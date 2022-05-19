@@ -3,6 +3,7 @@ import MuiPagination from "@mui/material/Pagination";
 import type { PaginationProps as MuiPaginationProps } from "@mui/material/Pagination";
 
 import AlertBox from "@/components/common/AlertBox";
+import { Fragment } from "react";
 
 type PaginationProps = MuiPaginationProps & {
     noItem: boolean;
@@ -17,7 +18,7 @@ const Pagination = ({
     ...props
 }: PaginationProps) => {
     return (
-        <>
+        <Fragment>
             {!!(count > 1) && (
                 <div
                     className={clsx(
@@ -36,7 +37,7 @@ const Pagination = ({
             )}
 
             {noItem && <AlertBox hasContainer={false} hasMargin={false} />}
-        </>
+        </Fragment>
     );
 };
 

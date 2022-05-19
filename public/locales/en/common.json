@@ -1,5 +1,7 @@
 {
     "site_title": "Site Title",
+    "loading": "Loading",
+    "load_more": "Load More",
     "currency": "Tomans",
     "not_found": {
         "description": "The page you were looking for is not found.",

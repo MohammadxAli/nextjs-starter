@@ -4,17 +4,20 @@ import MuiSelect, { SelectProps } from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InputLabel from "@mui/material/InputLabel";
+import ErrorMessage from "@/components/common/ErrorMessage";
 
-export interface BaseSelectProps extends SelectProps {
+export interface BaseSelectProps extends Omit<SelectProps, "error"> {
     isLoading?: boolean;
     iconStart?: React.ReactNode;
     rounded?: boolean;
     label?: string;
     showLabel?: boolean;
+    error?: string;
 }
 
 export default function Select({
     placeholder,
+    error,
     id,
     isLoading,
     rounded = undefined,
@@ -30,7 +33,7 @@ export default function Select({
     return (
         <div
             className={clsx(
-                "custom-select-wrapper flex flex-col",
+                "custom-select-wrapper relative flex flex-col",
                 iconStart && "has-icon-start",
                 rounded && "rounded-md"
             )}
@@ -59,6 +62,7 @@ export default function Select({
                     </MuiSelect>
                 </FormControl>
             )}
+            <ErrorMessage error={error} />
         </div>
     );
 }
