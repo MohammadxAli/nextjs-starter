@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import {
+    createContext,
+    Dispatch,
+    SetStateAction,
+    useContext,
+    useState,
+} from "react";
 
 type Step = "send_code" | "login";
 
 interface State {
     step: Step;
-    setStep: Function;
+    setStep: Dispatch<SetStateAction<Step>>;
     phone: string;
-    setPhone: Function;
-    user: any;
-    setUser: Function;
+    setPhone: Dispatch<SetStateAction<string>>;
+    hasPassword: boolean;
+    setHasPassword: Dispatch<SetStateAction<boolean>>;
+    user: any | null;
+    setUser: Dispatch<SetStateAction<any | null>>;
     isLoading: boolean;
-    setIsLoading: Function;
+    setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const initialState: State = {
@@ -18,16 +26,18 @@ const initialState: State = {
     setStep: () => {},
     phone: "",
     setPhone: () => {},
+    hasPassword: false,
+    setHasPassword: () => {},
     user: null,
     setUser: () => {},
     isLoading: false,
     setIsLoading: () => {},
 };
 
-export const AuthContext = React.createContext<State>(initialState);
+export const AuthContext = createContext<State>(initialState);
 
 export const useAuthContext = () => {
-    const context = React.useContext<State>(AuthContext);
+    const context = useContext<State>(AuthContext);
     if (context === undefined) {
         throw new Error(
             `useAuthContext must be used within a AuthContext.Provider`
@@ -41,13 +51,16 @@ interface ManagedAuthContextProps {
 }
 
 const ManagedAuthContext = ({ children }: ManagedAuthContextProps) => {
+    const [hasPassword, setHasPassword] = useState(false);
     const [step, setStep] = useState<Step>("send_code");
     const [phone, setPhone] = useState("");
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<any | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     return (
         <AuthContext.Provider
             value={{
+                hasPassword,
+                setHasPassword,
                 step,
                 setStep,
                 phone,
