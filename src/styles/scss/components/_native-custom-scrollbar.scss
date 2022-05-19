@@ -1,0 +1,19 @@
+$scrollbar-background: rgba($black, 0.1);
+$scrollbar-thumb: $primary;
+
+.native-custom-scrollbar {
+    overflow-y: auto;
+    scrollbar-color: $primary $scrollbar-background;
+    scrollbar-width: thin;
+}
+
+.native-custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: $scrollbar-background;
+}
+
+.native-custom-scrollbar::-webkit-scrollbar-thumb {
+    width: 6px;
+    border-radius: 5px;
+    background-color: $scrollbar-thumb;
+}

@@ -1,0 +1,35 @@
+@keyframes shake-animation {
+    0% {
+        transform: translateX(0rem);
+    }
+    25% {
+        transform: translateX(1rem);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(1rem);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes shake-animation-rotated {
+    0% {
+        transform: rotate(180deg) translateX(0);
+    }
+    25% {
+        transform: rotate(180deg) translateX(1rem);
+    }
+    50% {
+        transform: rotate(180deg) translateX(0);
+    }
+    75% {
+        transform: rotate(180deg) translateX(1rem);
+    }
+    100% {
+        transform: rotate(180deg) translateX(0);
+    }
+}

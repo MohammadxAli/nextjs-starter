@@ -1,1 +1,13 @@
 $utilities: ();
+
+/* Chrome, Safari, Edge, Opera */
+input.hide-number-input-arrows::-webkit-outer-spin-button,
+input.hide-number-input-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"].hide-number-input-arrows {
+    -moz-appearance: textfield;
+}
