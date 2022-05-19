@@ -1,51 +1,67 @@
-import { shouldUseMock } from "@/helpers/utils";
+const getQuery = (
+    mockQuery: string,
+    mainQuery: string,
+    value: any,
+    shouldMock: boolean
+) => {
+    if (!(typeof value === "undefined")) {
+        const str = shouldMock ? mockQuery + "=" : mainQuery + "=";
+        return str + value;
+    }
+};
 
 export const generateQueries = (
-    {
+    queries: QueryParams = {},
+    shouldMock: boolean
+) => {
+    const {
         page = 1,
         limit = 12,
         order = "desc",
-        sort,
+        sort = "date",
         q,
         ids,
         ...other
-    }: QueryParams = {},
-    useMock: boolean
-) => {
-    const shouldMock = shouldUseMock(useMock);
-    const queries = {
-        page: (shouldMock ? "_page=" : "page=") + page,
-        limit: (shouldMock ? "_limit=" : "perPage=") + limit,
-        order: (shouldMock ? "_order=" : "order=") + order,
-        sort: sort && (shouldMock ? "_sort=" : "sort=") + sort,
-        q: q && (shouldMock ? "q=" : "title=") + q,
-        ids: ids && generateIds(shouldMock, ids),
+    } = queries;
+    const formattedQueries = {
+        page: getQuery("_page", "page", page, shouldMock),
+        limit: getQuery("_limit", "perPage", limit, shouldMock),
+        order: getQuery("_order", "order", order, shouldMock),
+        sort: getQuery("_sort", "sort", sort, shouldMock),
+        q: getQuery("q", "title", q, shouldMock),
     };
-    return generateQueryString(queries, other);
+    return generateQueryString(formattedQueries, other);
 };
 
 const generateQueryString = <Q, O>(queries: Q, other: O) => {
     let query = "?";
+
+    const arrayQueries: string[] = [];
+
     Object.values(queries).forEach((value, i) => {
         const joiner = i > 0 ? "&" : "";
         if (!(typeof value === "undefined")) {
             query = query + joiner + value;
         }
     });
+
     Object.entries({ ...other }).forEach(([key, value]) => {
-        if (Boolean(value)) {
+        const val = value.toString();
+        const isArray = Boolean(arrayQueries.find((query) => query === key));
+        if (!isArray && Boolean(val)) {
             query = query + `&${key}=${value}`;
+        } else if (isArray && Boolean(value)) {
+            const generated = generateArrayQuery(key, value);
+            query = query + generated;
         }
     });
+
     return query;
 };
 
-const generateIds = (shouldMock: boolean, ids: number[]) => {
-    let str = shouldMock ? "id=" : "productIds=";
-    let idsString = ids.join(",");
-    if (shouldMock) {
-        idsString = ids.join("&id=");
-    }
-    str = str + idsString;
-    return str;
+const generateArrayQuery = (key: string, value: string) => {
+    let query = "";
+    const splitted: string[] = value.toString().split(",");
+    splitted.forEach((val, i) => (query = query + `&${key}[${i}]=${val}`));
+    return query;
 };
