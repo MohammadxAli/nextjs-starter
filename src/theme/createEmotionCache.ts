@@ -11,9 +11,7 @@ export default function createEmotionCache(isRTL?: any) {
         }
     }
     return createCache({
-        prepend: true,
         key: "css",
-        //@ts-ignore
         stylisPlugins: shouldRotate ? [rtlPlugin] : [],
     });
 }

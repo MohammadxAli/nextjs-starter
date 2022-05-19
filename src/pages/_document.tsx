@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import { getLangDir, isRtlLang } from "rtl-detect";
 import createEmotionServer from "@emotion/server/create-instance";
@@ -11,7 +11,7 @@ export default class AppDocument extends Document {
             <Html dir={getLangDir(locale)}>
                 <Head>
                     {!isRtlLang(locale) && (
-                        <>
+                        <Fragment>
                             <link
                                 rel="preconnect"
                                 href="https://fonts.googleapis.com"
@@ -25,7 +25,7 @@ export default class AppDocument extends Document {
                                 href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700;900&display=swap"
                                 rel="stylesheet"
                             />
-                        </>
+                        </Fragment>
                     )}
                 </Head>
                 <body>
@@ -72,13 +72,15 @@ AppDocument.getInitialProps = async (ctx) => {
 
     ctx.renderPage = () =>
         originalRenderPage({
-            enhanceApp: (App: any) => (props) =>
-                <App emotionCache={cache} {...props} />,
+            enhanceApp: (App: any) =>
+                function EnhanceApp(props) {
+                    return <App emotionCache={cache} {...props} />;
+                },
         });
 
     const initialProps = await Document.getInitialProps(ctx);
     // This is important. It prevents emotion to render invalid HTML.
-    // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
+    // See https://github.com/mui/material-ui/issues/26561#issuecomment-855286153
     const emotionStyles = extractCriticalToChunks(initialProps.html);
     const emotionStyleTags = emotionStyles.styles.map((style) => (
         <style
@@ -91,10 +93,6 @@ AppDocument.getInitialProps = async (ctx) => {
 
     return {
         ...initialProps,
-        // Styles fragment is rendered after the app and page rendering finish.
-        styles: [
-            ...React.Children.toArray(initialProps.styles),
-            ...emotionStyleTags,
-        ],
+        emotionStyleTags,
     };
 };
