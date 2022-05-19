@@ -1,4 +1,5 @@
 {
+    "site_title": "Site Title",
     "currency": "Tomans",
     "not_found": {
         "description": "The page you were looking for is not found.",
