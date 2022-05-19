@@ -1,12 +1,20 @@
 import ManagedAuthContext from "@/contexts/ManagedAuthContext";
 import ManagedUIContext from "@/contexts/ManagedUIContext";
-import { FC } from "react";
+import { useRouter } from "next/router";
+import { IntlProvider } from "react-intl";
 
-const GlobalContextProvider: FC = ({ children }) => {
+interface GlobalContextProviderProps {
+    children?: React.ReactNode;
+}
+
+const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
+    const { locale = "fa" } = useRouter();
     return (
-        <ManagedAuthContext>
-            <ManagedUIContext>{children}</ManagedUIContext>
-        </ManagedAuthContext>
+        <IntlProvider locale={locale} defaultLocale="fa">
+            <ManagedAuthContext>
+                <ManagedUIContext>{children}</ManagedUIContext>
+            </ManagedAuthContext>
+        </IntlProvider>
     );
 };
 

@@ -1,4 +1,4 @@
-import { createContext, FC, useContext } from "react";
+import { createContext, useContext } from "react";
 
 interface State {}
 
@@ -18,7 +18,11 @@ export const useUIContext = () => {
     return context;
 };
 
-const ManagedUIContext: FC = ({ children }) => {
+interface ManagedUIContextProps {
+    children?: React.ReactNode;
+}
+
+const ManagedUIContext = ({ children }: ManagedUIContextProps) => {
     return <UIContext.Provider value={{}}>{children}</UIContext.Provider>;
 };
 
