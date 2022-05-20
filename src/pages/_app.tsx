@@ -21,6 +21,7 @@ import GlobalContextProvider from "@/contexts/GlobalContextProvider";
 import { NextPage } from "next";
 import useConfigureQueryClient from "@/hooks/common/useConfigureQueryClient";
 import useEmotionCache from "@/hooks/common/useEmotionCache";
+import { DEFAULT_LOCALE } from "@/helpers/constants";
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -39,7 +40,7 @@ type CustomAppProps = AppProps & {
 function App(props: CustomAppProps) {
     const { Component, router, emotionCache, pageProps } = props;
     const getLayout = Component.getLayout || ((page: ReactNode) => page);
-    const { locale = "fa" } = router;
+    const { locale = DEFAULT_LOCALE } = router;
     const cache = useEmotionCache(locale, emotionCache);
     const { t } = useTranslation();
     const queryClient = useConfigureQueryClient();

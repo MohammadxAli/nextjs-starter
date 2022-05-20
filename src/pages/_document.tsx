@@ -3,10 +3,11 @@ import Document, { Head, Html, Main, NextScript } from "next/document";
 import { getLangDir, isRtlLang } from "rtl-detect";
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "@/theme/createEmotionCache";
+import { DEFAULT_LOCALE } from "@/helpers/constants";
 
 export default class AppDocument extends Document {
     render() {
-        const { locale = "fa" } = this.props;
+        const { locale = DEFAULT_LOCALE } = this.props;
         return (
             <Html dir={getLangDir(locale)}>
                 <Head>
@@ -63,7 +64,7 @@ AppDocument.getInitialProps = async (ctx) => {
     // 4. page.render
 
     const originalRenderPage = ctx.renderPage;
-    const { locale = "fa" } = ctx;
+    const { locale = DEFAULT_LOCALE } = ctx;
     const isRTL = isRtlLang(locale);
     // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
     // However, be aware that it can have global side effects.

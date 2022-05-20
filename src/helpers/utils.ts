@@ -2,6 +2,7 @@ import { shouldUseFaker } from "@/helpers/env-variables";
 import { enUS, faIR } from "date-fns/locale";
 import { generateQueries } from "@/helpers/queries";
 import formatUnicorn from "format-unicorn/safe";
+import { DEFAULT_LOCALE } from "@/helpers/constants";
 
 export const getRandomNumberBetween = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -56,7 +57,7 @@ export const scrollToRef = (ref: any, extra = 0) => {
     }
 };
 
-export const getDateFnsLocaleByCode = (locale = "fa") => {
+export const getDateFnsLocaleByCode = (locale = DEFAULT_LOCALE) => {
     switch (locale) {
         case "en":
             return enUS;

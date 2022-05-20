@@ -4,6 +4,7 @@ import { getLangDir, isRtlLang } from "rtl-detect";
 import { faIR, enUS } from "@mui/material/locale";
 import { CacheProvider } from "@emotion/react";
 import { EmotionCache } from "@emotion/cache";
+import { DEFAULT_LOCALE } from "@/helpers/constants";
 
 declare module "@mui/material/styles" {
     interface BreakpointOverrides {
@@ -11,7 +12,7 @@ declare module "@mui/material/styles" {
     }
 }
 
-const createThemeByLocale = (locale = "fa") => {
+const createThemeByLocale = (locale = DEFAULT_LOCALE) => {
     const isRTL = isRtlLang(locale);
     return createTheme(
         {
@@ -46,7 +47,7 @@ interface ThemeWrapperProps {
 const ThemeWrapper = ({
     emotionCache,
     children,
-    locale = "fa",
+    locale = DEFAULT_LOCALE,
 }: ThemeWrapperProps) => {
     const theme = createThemeByLocale(locale);
     return (
