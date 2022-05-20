@@ -1,7 +1,5 @@
 const { i18n } = require("./next-i18next.config");
-const { I18NextHMRPlugin } = require("i18next-hmr/plugin");
 const { resolve } = require("path");
-const localesDir = resolve("public/locales");
 
 /**
  * @type {import('next').NextConfig}
@@ -14,6 +12,8 @@ module.exports = {
     },
     webpack(config, context) {
         if (!context.isServer && context.dev) {
+            const localesDir = resolve("public/locales");
+            const { I18NextHMRPlugin } = require("i18next-hmr/plugin");
             config.plugins.push(new I18NextHMRPlugin({ localesDir }));
         }
         return config;
