@@ -1,7 +1,7 @@
 import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
 
-export default function createEmotionCache(isRTL?: any) {
+export default function createEmotionCache(isRTL?: boolean) {
     let shouldRotate = isRTL;
     const isClient = typeof isRTL === "undefined";
     if (isClient) {
