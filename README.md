@@ -13,11 +13,12 @@ To run the project you need to do the following:
 
 | Variable                          | Description                                                                                                            |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_DEFAULT_LOCALE`      | Required value\*, must be a two character string defining the default locale                                           |
 | `NEXT_PUBLIC_BASE_SERVER_API_URL` | The url of main API server, this can be same as mock server, in the early phase when main API server is not ready yet. |
 | `NEXT_PUBLIC_MOCK_SERVER_API_URL` | The url of mock API server, used to mock data.                                                                         |
 | `NEXT_PUBLIC_FAKER_TYPE`          | Possible values are: `yes` \| `no` \| `mixed`.                                                                         |
 
-**Notes**:
+**Notes on `NEXT_PUBLIC_FAKER_TYPE`**:
 
 -   If the value is `yes` then the project will be populated with mock data, which `NEXT_PUBLIC_MOCK_SERVER_API_URL` is used as the base url for all the routes.
 -   If the value is `mixed` then the project will be populated with mixed data (mock and real combined), this can be useful when you are developing and also don't want your pages to crash, if they are already using mock data behind the scene for some of the API routes.
