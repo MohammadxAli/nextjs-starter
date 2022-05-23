@@ -1,3 +1,4 @@
+require("dotenv").config();
 const faker = require("./faker");
 
 const generateFakeImage = (params) => {
