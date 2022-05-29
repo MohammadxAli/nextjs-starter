@@ -1,6 +1,5 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { Fragment } from "react";
 
 export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
     const translations = await serverSideTranslations(locale as string, [
@@ -14,10 +13,6 @@ export const getStaticProps = async ({ locale }: GetStaticPropsContext) => {
     };
 };
 
-type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
+export type IndexPageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const IndexPage = (props: IndexPageProps) => {
-    return <Fragment></Fragment>;
-};
-
-export default IndexPage;
+export { default } from "@/components/pages/HomePage";
