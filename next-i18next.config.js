@@ -6,7 +6,7 @@ const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "en";
 module.exports = {
     i18n: {
         defaultLocale,
-        locales: [defaultLocale, "fa"],
+        locales: [defaultLocale],
         localeDetection: false,
         localePath: path.resolve("./public/locales"),
     },
