@@ -15,18 +15,7 @@
         "jsx": "preserve",
         "baseUrl": ".",
         "typeRoots": ["src/types/*.d.ts"],
-        "paths": {
-            "@/assets/*": ["src/assets/*"],
-            "@/components/*": ["src/components/*"],
-            "@/contexts/*": ["src/contexts/*"],
-            "@/helpers/*": ["src/helpers/*"],
-            "@/hooks/*": ["src/hooks/*"],
-            "@/pages/*": ["src/pages/*"],
-            "@/services/*": ["src/services/*"],
-            "@/styles/*": ["src/styles/*"],
-            "@/theme/*": ["src/theme/*"],
-            "@/types/*": ["src/types/*"]
-        },
+        "paths": { "@/*": ["./src/*"] },
         "incremental": true,
         "esModuleInterop": true
     },
