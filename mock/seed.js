@@ -1,6 +1,8 @@
-const fs = require("fs");
 const db = require("./database");
+const { generateFakeUsers } = require("./src/factory/user");
 
-fs.writeFile("db.json", JSON.stringify(db, null, 2), function () {
-    console.log("Mock data has been generated");
-});
+db["user"] = generateFakeUsers();
+
+const getDatabase = () => db;
+
+module.exports = { getDatabase };

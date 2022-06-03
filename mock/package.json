@@ -8,10 +8,9 @@
     },
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
-        "dev": "nodemon --exec \"node seed.js && node index.js\"",
-        "watch": "npm run dev",
-        "postinstall": "node seed.js"
+        "start": "node ./index.js",
+        "dev": "nodemon --exec \"node ./index.js\"",
+        "watch": "npm run dev"
     },
     "license": "MIT",
     "dependencies": {

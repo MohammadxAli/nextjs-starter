@@ -1,10 +1,11 @@
 const parse = require("parse-link-header");
 const jsonServer = require("json-server");
-const data = require("../db.json");
 const cors = require("cors");
+const { getDatabase } = require("../seed");
 
 const app = jsonServer.create();
-const router = jsonServer.router(data);
+
+const router = jsonServer.router(getDatabase());
 
 app.use(
     cors({
