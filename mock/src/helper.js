@@ -55,7 +55,7 @@ const generateFakeHtmlContent = () => {
 const forceEnglishLocale = (callback) => {
     faker.locale = "en";
     callback();
-    faker.locale = process.env.DEFAULT_LOCALE;
+    faker.locale = process.env.MOCK_DEFAULT_LOCALE;
 };
 
 module.exports = {
