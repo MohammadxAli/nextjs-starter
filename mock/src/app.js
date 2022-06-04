@@ -1,7 +1,7 @@
 const parse = require("parse-link-header");
 const jsonServer = require("json-server");
 const cors = require("cors");
-const { getDatabase } = require("../seed");
+const { getDatabase } = require("./seed");
 
 const app = jsonServer.create();
 

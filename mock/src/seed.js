@@ -1,5 +1,5 @@
 const db = require("./database");
-const { generateFakeUsers } = require("./src/factory/user");
+const { generateFakeUsers } = require("./factory/user");
 
 db["user"] = generateFakeUsers();
 
