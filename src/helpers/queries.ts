@@ -1,18 +1,17 @@
 const getQuery = (
-    mockQuery: string,
-    mainQuery: string,
     value: any,
-    shouldMock: boolean
+    params: { [key in RouteType]: string },
+    type: RouteType
 ) => {
     if (!(typeof value === "undefined")) {
-        const str = shouldMock ? mockQuery + "=" : mainQuery + "=";
-        return str + value;
+        const key = Object.keys(params).find((key) => type === key);
+        if (key) return params[key as RouteType] + "=" + value;
     }
 };
 
 export const generateQueries = (
     queries: QueryParams = {},
-    shouldMock: boolean
+    routeType: RouteType
 ) => {
     const {
         page = 1,
@@ -24,11 +23,11 @@ export const generateQueries = (
         ...other
     } = queries;
     const formattedQueries = {
-        page: getQuery("_page", "page", page, shouldMock),
-        limit: getQuery("_limit", "perPage", limit, shouldMock),
-        order: getQuery("_order", "order", order, shouldMock),
-        sort: getQuery("_sort", "sort", sort, shouldMock),
-        q: getQuery("q", "title", q, shouldMock),
+        page: getQuery(page, { mock: "_page", main: "page" }, routeType),
+        limit: getQuery(limit, { mock: "_limit", main: "limit" }, routeType),
+        order: getQuery(order, { mock: "_order", main: "order" }, routeType),
+        sort: getQuery(sort, { mock: "_sort", main: "sort" }, routeType),
+        q: getQuery(q, { mock: "q", main: "q" }, routeType),
     };
     return generateQueryString(formattedQueries, other);
 };

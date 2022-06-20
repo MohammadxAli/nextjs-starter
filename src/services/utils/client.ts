@@ -1,18 +1,19 @@
 import axios from "@/services/utils/axios";
+import { AxiosResponse } from "axios";
 
 const client: ClientOverload = async <D, F>(
-    { url, useMock, ...config }: ConfigUrlRequired,
-    formatter?: (data: D) => F
+    { url, type, ...config }: ConfigUrlRequired,
+    formatter?: (data: D, response: AxiosResponse<D, any>) => F
 ) => {
     const response = await axios.request<D>({
         url: encodeURI(url),
-        useMock,
+        type,
         ...config,
     });
     if (typeof formatter === "undefined") {
         return response.data;
     }
-    return useMock ? response.data : formatter(response.data);
+    return type === "mock" ? response.data : formatter(response.data, response);
 };
 
 export default client;

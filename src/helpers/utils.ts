@@ -1,8 +1,14 @@
-import { shouldUseFaker } from "@/helpers/env-variables";
+import {
+    inDevEnvironment,
+    mainUrl,
+    mockUrl,
+    shouldUseFaker,
+} from "@/helpers/env-variables";
 import { enUS, faIR } from "date-fns/locale";
 import { generateQueries } from "@/helpers/queries";
 import formatUnicorn from "format-unicorn/safe";
-import { DEFAULT_LOCALE } from "@/helpers/constants";
+import { DEFAULT_LOCALE, IS_SERVER } from "@/helpers/constants";
+import { AxiosRequestConfig } from "axios";
 
 export const getRandomNumberBetween = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -29,19 +35,19 @@ export const getRoute = ({
     query,
     ...rest
 }: GetRouteProps): FormattedRouteUrl => {
-    const shouldMock = shouldUseMock(route.useMock);
-    let url = shouldMock ? route.mockUrl : route.url;
+    const type = shouldUseMock(route.type);
+    let url = type === "mock" ? route.mockUrl : route.url;
 
     if (Object.keys({ ...rest }).length) {
         url = formatUnicorn(url, { ...rest });
     }
 
     if (query) {
-        const queries = generateQueries(query, shouldMock);
+        const queries = generateQueries(query, type);
         url = url + queries;
     }
 
-    return { url, useMock: shouldMock };
+    return { url, type };
 };
 
 export const scrollToRef = (ref: any, extra = 0) => {
@@ -70,15 +76,15 @@ export const getLocationWithoutQueries = () => {
     return window.location.href.split("?")[0];
 };
 
-export const shouldUseMock = (useMock: boolean) => {
+export const shouldUseMock = (type: RouteType) => {
     if (!(shouldUseFaker === "mixed")) {
         if (shouldUseFaker === true) {
-            return true;
+            return "mock";
         } else {
-            return false;
+            return type;
         }
     }
-    return useMock;
+    return type;
 };
 
 export const updateLocationHistory = (
@@ -109,7 +115,16 @@ export const trigger = (eventType: string, data?: any) => {
     document.dispatchEvent(event);
 };
 
-export const logRequestedRoute = ({
+export const mapRouteTypeToUrl = (type: RouteType) => {
+    switch (type) {
+        case "main":
+            return mainUrl;
+        case "mock":
+            return mockUrl;
+    }
+};
+
+export const logRequestedUrl = ({
     baseURL,
     method,
     url,

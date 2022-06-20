@@ -3,13 +3,15 @@ import { AxiosResponse, AxiosRequestConfig } from "axios";
 import { LinkProps } from "next/link";
 
 declare global {
+    type RouteType = "mock" | "main";
+
     type ConfigUrlRequired = Required<AxiosRequestConfig, "url">;
 
     type ClientOverload = {
         <D = any>(urlAndConfig: ConfigUrlRequired): Promise<D>;
         <D, F>(
             urlAndConfig: ConfigUrlRequired,
-            formatter: (data: D) => F
+            formatter: (data: D, response: AxiosResponse<D, any>) => F
         ): Promise<F>;
     };
 
@@ -32,12 +34,12 @@ declare global {
     interface RouteUrl {
         url: string;
         mockUrl: string;
-        useMock: boolean;
+        type: RouteType;
     }
 
     interface FormattedRouteUrl {
         url: string;
-        useMock: boolean;
+        type: RouteType;
     }
 
     interface GetRouteProps {
