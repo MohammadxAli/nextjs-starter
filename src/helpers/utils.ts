@@ -108,3 +108,19 @@ export const trigger = (eventType: string, data?: any) => {
     const event = new CustomEvent(eventType, { detail: data });
     document.dispatchEvent(event);
 };
+
+export const logRequestedRoute = ({
+    baseURL,
+    method,
+    url,
+}: AxiosRequestConfig) => {
+    if (baseURL && inDevEnvironment) {
+        const fullUrl = baseURL + url;
+        const str = method?.toUpperCase() + " " + fullUrl;
+        if (IS_SERVER) {
+            console.log("\x1b[36m%s\x1b[0m", str);
+        } else {
+            console.log(`%c${str}`, "color: #16ffff");
+        }
+    }
+};
