@@ -33,11 +33,14 @@ yarn-error.log*
 # vercel
 .vercel
 
-# lock
+# lock files
+# We use pnpm to install dependencies, so we need to ignore the npm and yarn lock files
 yarn.lock
+package-lock.json
 
 # Editor or OS files/folders
 .vscode
 
 # Custom
 tsconfig.tsbuildinfo
+.pnpm-debug.log
