@@ -5,9 +5,9 @@ A mock server using [json-server](https://github.com/typicode/json-server) is al
 
 ## Getting started
 
-To run the project you need to do the following:
+This project is using [pnpm](https://pnpm.io/), so instead of using npm/yarn it is encouraged to install dependencies using pnpm. If you don't have pnpm installed on your machine you can [follow the instructions at pnpm docs](https://pnpm.io/installation) to get it up and running for your machine. To run the project you need to do the following:
 
-1. Start by running the `npm install` command to install all the dependencies.
+1. Start by running the `pnpm install` command to install all the dependencies.
 2. Duplicate or rename `.env.local.example` to `.env.local` and update the environment variables.  
    The variable values are defined as:
 
